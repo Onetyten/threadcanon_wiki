@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema(
             token: { type: String, required: true }, 
             expiresAt: { type: Date, required: true },
             createdAt: { type: Date, default: Date.now },
-            device: { type: String, default: 'web' }
         }],
         createdAt: {
             type: Date,

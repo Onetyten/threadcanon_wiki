@@ -56,6 +56,10 @@ const blogSchema = new mongoose({
     likedUsers:{
         type:[mongoose.Schema.Types.ObjectId],
         ref:"user"
+    },
+    fandom:{
+        type:String,
+        required:true
     }
 
 })

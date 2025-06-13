@@ -5,6 +5,7 @@ const app = express();
 import cors from 'cors';
 import mongoConnect from './utils/mongoConnect.js';
 import signUpRoute from './Routes/v1/auth/signupRoute.js'
+import signInRoute from './Routes/v1/auth/signinRoute.js'
 const PORT = process.env.PORT || 4000;
 
 
@@ -19,6 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
 app.use('/v1/auth/',signUpRoute)
+app.use('/v1/auth/',signInRoute)
 
 
 

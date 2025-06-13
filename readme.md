@@ -49,7 +49,7 @@ While users do not need to be logged in to view blogs, they will be required to 
 Example: `Authorization: Bearer <your_jwt_token>`
 
 
-1. ## Signup
+1. # Signup
 
    - HTTP method: POST
    - URL: /v1/auth/signup
@@ -116,3 +116,65 @@ const res = await axios.post("/auth/signup", { firstName, lastName, email, passw
     "success": true
 }
 ```
+
+
+2. # Signin
+
+   - HTTP method: POST
+   - URL: /v1/auth/signin
+   - Description: Sign in an existing user.
+
+   ### Body params:
+
+   ### compulsory
+    - email
+    - password
+
+  Sample Request body
+
+  ```json
+   {
+      "email":"yagami@gmail.com",
+      "password":"Notebook"
+   }
+
+  ```
+
+### How to fetch (using fetch):
+
+```javascript
+const res = await fetch("/v1/auth/signin", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password }),
+});
+```
+
+### How to fetch (using axios):
+
+```javascript
+const res = await axios.post("/v1/auth/signin", { email, password});
+```
+
+### success response
+
+
+   ```json
+   {
+      "message": "login successful",
+      "success": true,
+      "token": "<token string>",
+      "refreshToken": {
+         "token": "<refresh token string>",
+         "expiresAt": "2025-11-28T23:01:44.572Z",
+         "_id": "684cadd8437e5f2360de4440",
+         "createdAt": "2025-06-13T23:01:44.575Z"
+      },
+      "data": {
+         "id": "ghyrtrnsky792h2g2t22",
+         "email": "yagami@gmail.com",
+         "lastLogin": "2025-06-13T23:01:44.576Z"
+      }
+   }
+```
+
