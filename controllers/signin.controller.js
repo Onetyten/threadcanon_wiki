@@ -47,7 +47,7 @@ export async function signInController(req,res) {
     }
 
     catch(error){
-        res.status(500).json({message:error.message,success:false})
+        return res.status(500).json({message:error.message,success:false})
     }
 }
 

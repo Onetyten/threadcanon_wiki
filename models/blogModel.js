@@ -1,6 +1,6 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
-const blogSchema = new mongoose({
+const blogSchema = new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
@@ -20,7 +20,7 @@ const blogSchema = new mongoose({
     state:{
         type:String,
         enum:["draft","published"],
-        default:["draft"]
+        default:"draft"
     },
     readCount:{
         type:Number,
@@ -29,7 +29,9 @@ const blogSchema = new mongoose({
     readingTime:{
         type:String,
     },
-
+    headImageUrl:{
+        type:String,
+    },
     tags:{
         type:[String],
 
@@ -68,5 +70,5 @@ const blogSchema = new mongoose({
 
 })
 
-const blog = new model("blog",blogSchema)
+const blog = new mongoose.model("blog",blogSchema)
 export default blog

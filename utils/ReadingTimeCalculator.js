@@ -1,7 +1,7 @@
 export default function getReadingTime(body){
     const averageWordPerSecond= 3.5
-    const blogSize = body.lenght
-    readingTimeInSeconds = blogSize / averageWordPerSecond
+    const wordCount = body.trim().split(/\s+/).length;
+    const readingTimeInSeconds = wordCount / averageWordPerSecond
     if (readingTimeInSeconds < 60){
         return `${readingTimeInSeconds}s`
     }
@@ -9,9 +9,9 @@ export default function getReadingTime(body){
         return `1m`
     }
     else {
-        const remainderTimeInSeconds = readingTimeInSeconds % 60
+        const remainderTimeInSeconds = Math.floor(readingTimeInSeconds % 60)
         const readingTimeInMinutes = Math.floor(readingTimeInSeconds/60)
-        return `${readingTimeInMinutes}${remainderTimeInSeconds}`
+        return `${readingTimeInMinutes}m ${remainderTimeInSeconds}s`
     }
 
 }

@@ -23,12 +23,17 @@ export async function signupController (req,res){
             const profile = await new user({email,firstName,lastName,profileImageUrl,password:hashedPassword})
             const savedUser = await profile.save()
             console.log(`user ${savedUser.firstName} with id ${savedUser._id} profile created successfully`)
-            res.status(201).json({message:"user created successfully",data:savedUser,success:true})
+            return res.status(201).json({message:"user created successfully",data:savedUser,success:true})
     } 
 
     catch (error) {
-        res.status(500).json({message:"internal server error",success:false})
+        if (error.code === 11000){
+            console.log(`user with email ${email} already exists`)
+            return res.status(409).json({message:"user already exists",success:false})
+        }
         console.log(error)
+        return res.status(500).json({message:"internal server error",success:false})
+        
     }
 
 }

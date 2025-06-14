@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken"
 const Authorization = async(req,res,next)=>{
     const authHeader = req.headers.authorization
 
-
     // check if authorization header is included in the API call
     if (!authHeader){
         console.log("WARN","\n source:logs/auth/authorization.js  ",`Authorization header not found,request to ${req.originalUrl} is not authorized`)
