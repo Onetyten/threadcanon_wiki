@@ -29,6 +29,7 @@ const blogSchema = new mongoose({
     readingTime:{
         type:String,
     },
+
     tags:{
         type:[String],
 
@@ -46,20 +47,23 @@ const blogSchema = new mongoose({
             userId:{ type:mongoose.Schema.Types.ObjectId,ref:"user"},
             rating:{type:Number, required:true, min:1,max:5}
     }
-    ]},
+        ],
+        default:[]
+    },
     comments:{
         type: [{
             userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
             content: { type: String, required: true },
-        }]
+        }],
+        default:[]
     },
     likedUsers:{
         type:[mongoose.Schema.Types.ObjectId],
-        ref:"user"
+        ref:"user",
+        default:[]
     },
     fandom:{
         type:String,
-        required:true
     }
 
 })
