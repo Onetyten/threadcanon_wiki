@@ -49,7 +49,7 @@ While users do not need to be logged in to view blogs, they will be required to 
 Example: `Authorization: Bearer <your_jwt_token>`
 
 
-1. # Signup
+# 1. Signup
 
    - HTTP method: POST
    - URL: /v1/auth/signup
@@ -118,7 +118,7 @@ const res = await axios.post("/auth/signup", { firstName, lastName, email, passw
 ```
 
 
-2. # Signin
+# 2. Signin
 
    - HTTP method: POST
    - URL: /v1/auth/signin
@@ -177,7 +177,7 @@ const res = await axios.post("/v1/auth/signin", { email, password});
    }
 ```
 
-2. # Refresh Access Token
+# 3. Refresh Access Token
 
    - HTTP method: POST
    - URL: /v1/auth/refreshAccessToken
@@ -224,5 +224,94 @@ const res = await axios.post("/v1/auth/signin", { email, password});
       "message": "New token assigned",
       "success": true
       }
+```
+
+# Blogs
+
+# 4. Create Blog
+
+   - HTTP method: POST
+   - URL: /v1/api/blog/create
+   - Description: Create a new blog and saves it as draft. 
+   - Authorization: Bearer <your_jwt_token>
+
+   ### This operation requires a token hence users need to be signed in  
+
+   ### Body params:
+   *compulsory*
+    - title (must be unique)
+    - body
+    *optional*
+    - tags (Array)
+    - description
+    - headImageUrl
+
+  Sample Request body
+
+  ```json
+   {
+   "title": "The Time-Travel Genius of Ocarina of Time 4",
+   "description": "Exploring how time travel shapes gameplay and narrative in Nintendo’s iconic masterpiece.",
+   "body": "Ocarina of Time isn't just a great game—it’s a blueprint for time-based storytelling........",
+   "tags": ["Zelda", "Ocarina of Time", "Nintendo", "Time Travel", "N64", "Retro Gaming"],
+   "fandom": "Legend of Zelda",
+   "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw"
+   }
+
+  ```
+
+### How to fetch (using fetch):
+
+   ```javascript
+   const res = await fetch("/v1/api/blog/create", {
+   method: "POST",
+   headers: { "Content-Type": "application/json" },
+   body: JSON.stringify({ body,tags,fandom,headImageUrl,description,title }),
+   });
+   ```
+
+### How to fetch (using axios):
+
+   ```javascript
+   const res = await axios.post("/v1/api/blog/create", { body,tags,fandom,headImageUrl,description,title});
+   ```
+
+### success response
+
+
+```json
+{
+    "message": "blog The Time-Travel Genius of Ocarina of Time 6 created successfully and saved as draft",
+    "success": true,
+    "data": {
+        "userId": "684d635089bcc1e0e1c0cf17",
+        "title": "The Time-Travel Genius of Ocarina of Time 6",
+        "description": "Exploring how time travel shapes gameplay and narrative in Nintendo’s iconic masterpiece.",
+        "author": "Light Yagami",
+        "state": "draft",
+        "readCount": 0,
+        "readingTime": "2m 17s",
+        "headImageUrl": "https://example.com/images/ocarina-of-time-cover.jpg",
+        "tags": [
+            "Zelda",
+            "Ocarina of Time",
+            "Nintendo",
+            "Time Travel",
+            "N64",
+            "Retro Gaming"
+        ],
+        "timeStamp": {
+            "createdAt": "2025-06-14T13:00:10.491Z",
+            "updatedAt": "2025-06-14T13:00:10.491Z"
+        },
+        "body": "Ocarina of Time isn't just a great game—it’s a blueprint for time-based storytelling. From the Master Sword to the Temple of Time, Nintendo masterfully lets players bend chronology to solve puzzles and defeat evil......",
+        "likedUsers": [],
+        "fandom": "Legend of Zelda",
+        "_id": "684d725a109f294077fc15c4",
+        "rating": [],
+        "comments": [],
+        "__v": 0
+    }
+}
 ```
 

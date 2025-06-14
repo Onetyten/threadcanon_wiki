@@ -6,7 +6,6 @@ import getReadingTime from '../../utils/ReadingTimeCalculator.js'
 export async function CreateBlogController(req,res){
     const { id: userId } = req.user
     if (!userId){
-        console.log(req.user)
         console.log("ERROR","\n createBlog.controller.js","user id not found")
         res.status(401).json({message:'User id not available,Login to get authorized'})
     }
