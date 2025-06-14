@@ -333,7 +333,7 @@ const res = await axios.post("/v1/auth/signin", { email, password});
 # 5. Publish Blog
 
    - HTTP method: GET
-   - URL: /v1/api/blog/publish/<blogId>
+   - URL: /v1/api/blog/publish/:blogId
    - Description: Publish an existing blog.
    - Authorization: Bearer <your_jwt_token>
 
@@ -357,7 +357,7 @@ const res = await fetch(`/v1/api/blog/publish/${blogId}`, { // Assuming blogId i
 ### How to fetch (using axios):
 
    ```javascript
-   const res = await axios.post("/v1/api/blog/create", { body, tags, fandom, headImageUrl, description, title },
+   const res = await axios.post(`/v1/api/blog/publish/${blogId}`, { body, tags, fandom, headImageUrl, description, title },
   {
     headers: {
       "Authorization": `Bearer <your_jwt_token>` // This line adds the token
@@ -408,3 +408,71 @@ const res = await fetch(`/v1/api/blog/publish/${blogId}`, { // Assuming blogId i
    }
 ```
 
+# 6. Fetch published blogs
+
+   - HTTP method: GET
+   - URL: /v1/api/blog/fetch
+   - Description: Fetch all published blogs.
+
+   ### This operation does not require a token hence users do not need to be signed in  
+
+
+
+### How to fetch (using fetch):
+
+```javascript
+const res = await fetch(`/v1/api/blog/fetch`);
+
+```
+
+### How to fetch (using axios):
+
+   ```javascript
+      const res = await axios.post(`/v1/api/blog/fetch`);
+   ```
+
+### success response
+
+
+```json
+   {
+    "message": "blogs fetched successfully",
+    "count": 25,
+    "success": true,
+    "data": [
+        {
+            "timeStamp": {
+                "createdAt": "2025-06-14T13:57:17.111Z",
+                "updatedAt": "2025-06-14T13:57:17.111Z"
+            },
+            "_id": "684d7fbdd83f10961a6fc8ff",
+            "userId": "684d7cc0d83f10961a6fc8ea",
+            "title": "Beyond Extinction: The Chozo's Ascended Legacy and Samus's Unwitting Role",
+            "description": "A deep dive into the possibility that the Chozo didn't just disappear, but ascended to a higher plane, subtly influencing events and using Samus Aran for a purpose yet unknown.",
+            "author": "Okarun Takamura",
+            "state": "published",
+            "readCount": 0,
+            "readingTime": "2m 39s",
+            "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw",
+            "tags": [
+                "Metroid",
+                "FanTheory",
+                "Chozo",
+                "SamusAran",
+                "Lore",
+                "Gaming",
+                "Nintendo",
+                "SciFi"
+            ],
+            "body": "The Chozo, the enigmatic bird-like benefactors of Samus Aran, are widely believed to be an extinct race. Their legacy, it seems, lives o.....",
+            "likedUsers": [],
+            "fandom": "Metroid",
+            "rating": [],
+            "comments": [],
+            "__v": 0
+        },
+        // ... other blogs ...
+    ]
+   }
+   
+```
