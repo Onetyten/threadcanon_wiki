@@ -476,3 +476,66 @@ const res = await fetch(`/v1/api/blog/fetch`);
    }
    
 ```
+
+
+# 7. Fetch one published blog by Id 
+
+   - HTTP method: GET
+   - URL: /v1/api/blog/:id
+   - Description: Fetch one published blog by id as well as the author information.
+
+   ### This operation does not require a token hence users do not need to be signed in  
+
+
+
+### How to fetch (using fetch):
+
+```javascript
+const res = await fetch(`/v1/api/blog/{id}`);
+
+```
+
+### How to fetch (using axios):
+
+   ```javascript
+      const res = await axios.post(`/v1/api/blog/{id}`);
+
+   ```
+
+### success response
+
+
+```json
+   {
+      "message": "blog fetched successfully",
+      "success": true,
+      "data": {
+         "timeStamp": {
+               "createdAt": "2025-06-14T14:03:31.494Z",
+               "updatedAt": "2025-06-14T14:03:31.494Z"
+         },
+         "_id": "684d81337417c9bd7ac1f661",
+         "userId": "684d7cc0d83f10961a6fc8ea",
+         "title": "Ash Ketchum's Eternal Youth: Coma Theory?",
+         "description": "A look into the persistent fan theory that Ash Ketchum never ages because he's actually in a coma, with the Pokémon world being his dream.",
+         "author": "Okarun Takamura",
+         "state": "published",
+         "readCount": 2,
+         "readingTime": "52s",
+         "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw",
+         "tags": [ "Pokemon", "AshKetchum", "Anime", "ComaTheory", "Speculation", "CartoonLogic", "Mystery"],
+         "body": "For over two decades,.........",
+         "likedUsers": [],
+         "fandom": "Pokémon",
+         "rating": [],
+         "comments": [],
+         "__v": 0
+      },
+      "authorProfile": {
+         "email": "turbogranny@gmail.com",
+         "firstName": "Okarun",
+         "lastName": "Takamura",
+         "profileImageUrl": "https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+      }
+   }
+```

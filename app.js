@@ -9,6 +9,7 @@ import refreshAccessTokenRoute from './Routes/v1/auth/refreshAcessToken.js'
 import createBlogRoute from './Routes/v1/api/createBlogRoute.js'
 import publishBlogRoute from './Routes/v1/api/publishBlogRoute.js'
 import fetchBlogRoute from './Routes/v1/api/fetchBlogRoute.js'
+import fetchOneBlogRoute from './Routes/v1/api/fetchOneBlogRoute.js'
 const PORT = process.env.PORT || 4000;
 import Authorization from './middlewares/authorization.js';
 
@@ -30,6 +31,8 @@ app.use('/v1/auth/',refreshAccessTokenRoute)
 
 //Blog routes
 app.use('/v1/api/blog/',fetchBlogRoute)
+app.use('/v1/api/blog/',fetchOneBlogRoute)
+
 
 // any route that comes after this will be checked for a token so dont put any non login required app after this for God's sake
 app.use('/v1/api',Authorization)

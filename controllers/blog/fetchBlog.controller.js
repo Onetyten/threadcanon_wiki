@@ -12,6 +12,7 @@ export async function FetchBlogController(req,res) {
             console.log("INFO","\n fetchBlog.controller","There are no blogs available,sign in to create a blog")
             return res.status(404).json({message:"There are no blogs available,sign in to create a blog",success:false})
         }
+        fetchedBlog.
         console.log(`blogs fetched successfully from ${req.originalUrl}`)
         return res.status(200).json({message:"blogs fetched successfully",count:fetchedBlog.length,success:true,data:fetchedBlog})
 
