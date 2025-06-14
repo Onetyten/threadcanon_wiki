@@ -6,15 +6,20 @@ import bcrypt from 'bcrypt'
 
 export async function signupController (req,res){
 
+    // check whether the request body params like email, password and names is valid or nah
     if (!HandleRequestValidity(req)){
         return res.status(400).json({message:"invalid request",success:false})
     }
 
+
     const {email,firstName,lastName,password,profileImageUrl} = req.body
+
+    // encrypt the password before saving to the database
     const salt = await bcrypt.genSalt(10)
     const hashedPassword  = await bcrypt.hash(password,salt)
 
     try {
+            // save the profile
             const profile = await new user({email,firstName,lastName,profileImageUrl,password:hashedPassword})
             const savedUser = await profile.save()
             console.log(`user ${savedUser.firstName} with id ${savedUser._id} profile created successfully`)

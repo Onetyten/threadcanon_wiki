@@ -56,7 +56,7 @@ Example: `Authorization: Bearer <your_jwt_token>`
    - Description: Registers a new user.
 
    ### Body params:
-   ### compulsory
+   *compulsory*
     - firstName
     - lastName
     - email
@@ -125,8 +125,7 @@ const res = await axios.post("/auth/signup", { firstName, lastName, email, passw
    - Description: Sign in an existing user.
 
    ### Body params:
-
-   ### compulsory
+   *compulsory*
     - email
     - password
 
@@ -176,5 +175,54 @@ const res = await axios.post("/v1/auth/signin", { email, password});
          "lastLogin": "2025-06-13T23:01:44.576Z"
       }
    }
+```
+
+2. # Refresh Access Token
+
+   - HTTP method: POST
+   - URL: /v1/auth/refreshAccessToken
+   - Description: Refresh the access token after it expires in an hour. 
+
+   ### Body params:
+   *compulsory*
+    - refreshToken
+
+  Sample Request body
+
+  ```json
+   {
+      "refreshToken":"<refresh token here>"
+   }
+  ```
+
+### How to fetch (using fetch):
+
+   ```javascript
+   const res = await fetch("/v1/auth/refreshAccessToken", {
+   method: "POST",
+   headers: { "Content-Type": "application/json" },
+   body: JSON.stringify({ refreshToken }),
+   });
+   ```
+
+### How to fetch (using axios):
+
+   ```javascript
+   const res = await axios.post("/v1/auth/refreshAccessToken", { refreshToken});
+   ```
+
+### success response
+
+
+```json
+   {
+      "user": {
+         "id": "<id here>",
+         "email": "yagami@gmail.com",
+         "token": "<Access token here>"
+      },
+      "message": "New token assigned",
+      "success": true
+      }
 ```
 
