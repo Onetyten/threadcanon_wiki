@@ -3,7 +3,7 @@ export default function getReadingTime(body){
     const wordCount = body.trim().split(/\s+/).length;
     const readingTimeInSeconds = wordCount / averageWordPerSecond
     if (readingTimeInSeconds < 60){
-        return `${readingTimeInSeconds}s`
+        return `${Math.floor(readingTimeInSeconds)}s`
     }
     else if (readingTimeInSeconds == 60){
         return `1m`

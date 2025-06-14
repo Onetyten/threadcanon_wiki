@@ -1,1 +1,78 @@
-{"message":"login successful","success":true,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjg0ZDYzNTA4OWJjYzFlMGUxYzBjZjE3In0sImlhdCI6MTc0OTkwMzUyMSwiZXhwIjoxNzQ5OTA3MTIxfQ.s0GV7OZBRjj4RYFbgKriactDnpLJs3l5Q7S0ZQFxdNs","refreshToken":{"token":"20971abba17e0060aeb7bc1a2f90a7961672b6504486340922e76d5f5c5f9fa333c9254fb0cf838c","expiresAt":"2025-11-29T12:01:41.570Z","_id":"684d64a5c286fbdd1abc1851","createdAt":"2025-06-14T12:01:41.572Z"},"data":{"id":"684d635089bcc1e0e1c0cf17","email":"yagami@gmail.com","lastLogin":"2025-06-14T12:01:41.572Z"}}
+{
+    "email":"turbogranny@gmail.com",
+    "firstName":"Okarun",
+    "lastName":"Takamura",
+    "password":"ShinyJewelz",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+{
+    "email":"yagami@gmail.com",
+    "firstName":"Light",
+    "lastName":"Yagami",
+    "password":"Notebook",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"erenyeager@gmail.com",
+    "firstName":"Eren",
+    "lastName":"Teager",
+    "password":"RumblingUnited",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"akihito_kamado@gmail.com",
+    "firstName":"Akihito",
+    "lastName":"Kamado",
+    "password":"Shinyswords",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"ichigo.kurosaki@example.com",
+    "firstName":"Ichigo",
+    "lastName":"Kurosaki",
+    "password":"ZangetsuSoul",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"naruto.uzumaki@example.com",
+    "firstName":"Naruto",
+    "lastName":"Uzumaki",
+    "password":"Rasengan7th",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"luffy.d.monkey@example.com",
+    "firstName":"Monkey D.",
+    "lastName":"Luffy",
+    "password":"KingOfThePirates",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"saitama.hero@example.com",
+    "firstName":"Saitama",
+    "lastName":"Hero",
+    "password":"OnePunchOK",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"guts.berserker@example.com",
+    "firstName":"Guts",
+    "lastName":"Berserker",
+    "password":"Dragonslayer1",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}
+
+{
+    "email":"levi.ackerman@example.com",
+    "firstName":"Levi",
+    "lastName":"Ackerman",
+    "password":"HumanitysStrongest",
+    "profileImageUrl":"https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
+}

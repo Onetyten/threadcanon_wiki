@@ -226,13 +226,14 @@ const res = await axios.post("/v1/auth/signin", { email, password});
       }
 ```
 
+
 # Blogs
 
 # 4. Create Blog
 
    - HTTP method: POST
-   - URL: /v1/api/blog/create
-   - Description: Create a new blog and saves it as draft. 
+   - URL: /v1/api/blog/create?state=published
+   - Description: Create a new blog and saves it as draft by default or published if the query is provided. 
    - Authorization: Bearer <your_jwt_token>
 
    ### This operation requires a token hence users need to be signed in  
@@ -245,6 +246,11 @@ const res = await axios.post("/v1/auth/signin", { email, password});
     - tags (Array)
     - description
     - headImageUrl
+
+
+   ### Query params:
+    *optional*
+    - state
 
   Sample Request body
 
@@ -265,7 +271,7 @@ const res = await axios.post("/v1/auth/signin", { email, password});
    ```javascript
    const res = await fetch("/v1/api/blog/create", {
    method: "POST",
-   headers: { "Content-Type": "application/json" },
+   headers: { "Content-Type": "application/json","Authorization": `Bearer <your_jwt_token>`  },
    body: JSON.stringify({ body,tags,fandom,headImageUrl,description,title }),
    });
    ```
@@ -273,7 +279,14 @@ const res = await axios.post("/v1/auth/signin", { email, password});
 ### How to fetch (using axios):
 
    ```javascript
-   const res = await axios.post("/v1/api/blog/create", { body,tags,fandom,headImageUrl,description,title});
+   const res = await axios.post("/v1/api/blog/create", { body, tags, fandom, headImageUrl, description, title },
+  {
+    headers: {
+      "Authorization": `Bearer <your_jwt_token>` // Add this line
+    }
+  }
+);
+
    ```
 
 ### success response
@@ -313,5 +326,85 @@ const res = await axios.post("/v1/auth/signin", { email, password});
         "__v": 0
     }
 }
+```
+
+
+
+# 5. Publish Blog
+
+   - HTTP method: GET
+   - URL: /v1/api/blog/publish/<blogId>
+   - Description: Publish an existing blog.
+   - Authorization: Bearer <your_jwt_token>
+
+   ### This operation requires a token hence users need to be signed in  
+
+
+
+### How to fetch (using fetch):
+
+   ```javascript
+const res = await fetch(`/v1/api/blog/publish/${blogId}`, { // Assuming blogId is a variable
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer <your_jwt_token>` // Add this line
+  },
+});
+
+   ```
+
+### How to fetch (using axios):
+
+   ```javascript
+   const res = await axios.post("/v1/api/blog/create", { body, tags, fandom, headImageUrl, description, title },
+  {
+    headers: {
+      "Authorization": `Bearer <your_jwt_token>` // This line adds the token
+    }
+  }
+);
+
+   ```
+
+### success response
+
+
+```json
+   {
+      "message": "blog Ash Ketchum's Eternal Youth: Coma Theory? published successfully",
+      "success": true,
+      "data": {
+         "timeStamp": {
+               "createdAt": "2025-06-14T14:03:31.494Z",
+               "updatedAt": "2025-06-14T14:03:31.494Z"
+         },
+         "_id": "684d81337417c9bd7ac1f661",
+         "userId": "684d7cc0d83f10961a6fc8ea",
+         "title": "Ash Ketchum's Eternal Youth: Coma Theory?",
+         "description": "A look into the persistent fan theory that Ash Ketchum never ages because he's actually in a coma, with the Pokémon world being his dream.",
+         "author": "Okarun Takamura",
+         "state": "published",
+         "readCount": 0,
+         "readingTime": "52s",
+         "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw",
+         "tags": [
+               "Pokemon",
+               "AshKetchum",
+               "FanTheory",
+               "Anime",
+               "ComaTheory",
+               "Speculation",
+               "CartoonLogic",
+               "Mystery"
+         ],
+         "body": "For over two decades, Ash Ketchum has journeyed across ......",
+         "likedUsers": [],
+         "fandom": "Pokémon",
+         "rating": [],
+         "comments": [],
+         "__v": 0
+      }
+   }
 ```
 

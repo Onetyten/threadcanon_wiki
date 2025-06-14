@@ -13,16 +13,20 @@ export async function CreateBlogController(req,res){
         console.log("WARN","\n createBlog.controller.js","invalid request")
         return res.status(400).json({message:"invalid request",success:false})
     }
+    const state = req.query.state || "draft"
+    if (state!=="draft" && state!=="published"){
+        state = "draft"
+    }
     const {title,description,body,tags,fandom,headImageUrl} = req.body
     const readingTime = getReadingTime(body)
 
     try {
             const authorProfile = await user.findById(userId)
             const author = authorProfile.firstName +" "+authorProfile.lastName
-            const newBlog = await new blog({title,description,body,author,readingTime,userId,tags,fandom,headImageUrl})
+            const newBlog = await new blog({title,description,body,author,readingTime,userId,tags,fandom,headImageUrl,state})
             await newBlog.save()
             console.log(`blog ${newBlog.title} created successfully from ${req.originalUrl}`)
-            return res.status(201).json({message:`blog ${newBlog.title} created successfully and saved as draft`,success:true,data:newBlog})
+            return res.status(201).json({message:`blog ${newBlog.title} created successfully and saved as ${newBlog.state}`,success:true,data:newBlog})
     }
     catch (error) {
         if (error.code === 11000){
