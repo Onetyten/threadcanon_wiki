@@ -481,24 +481,26 @@ const res = await fetch(`/v1/api/blog/fetch`);
 # 7. Fetch one published blog by Id 
 
    - HTTP method: GET
-   - URL: /v1/api/blog/:id
+   - URL: /v1/api/blog//fetchone/:id
    - Description: Fetch one published blog by id as well as the author information.
 
    ### This operation does not require a token hence users do not need to be signed in  
 
-
+### params:
+   *optional*
+    - id
 
 ### How to fetch (using fetch):
 
 ```javascript
-const res = await fetch(`/v1/api/blog/{id}`);
+const res = await fetch(`/v1/api/blog/fetchone/{id}`);
 
 ```
 
 ### How to fetch (using axios):
 
    ```javascript
-      const res = await axios.post(`/v1/api/blog/{id}`);
+      const res = await axios.post(`/v1/api/blog/fetchone/{id}`);
 
    ```
 
@@ -538,4 +540,164 @@ const res = await fetch(`/v1/api/blog/{id}`);
          "profileImageUrl": "https://preview.redd.it/1upvo51j79u51.jpg?width=640&crop=smart&auto=webp&s=660fd8f03282eb487b2f1b73d39a63cd89eeec8b"
       }
    }
+```
+
+
+# 8. Fetch all user posts 
+
+   - HTTP method: GET
+   - URL: v1/api/blog/user/fetchposts?page=1&limit=5&state=drafted
+   - Description: Fetches all the posts written by a user, draft and published.
+
+### This operation requires a token hence users need to be signed in
+
+### request query (optional)
+- page (number)
+- limit (numbber)
+- state (string: draft or published)
+
+### How to fetch (using fetch):
+
+```javascript
+   const res = await fetch(`/v1/api/blog/user/fetchposts`,{
+   method: "GET",
+   headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer <your_jwt_token>`
+   },
+   });
+
+```
+
+### How to fetch (using axios):
+
+   ```javascript
+      const res = await axios.post(`/v1/api/blog/user/fetchposts`,{ headers: { "Authorization": `Bearer <your_jwt_token>`} });
+
+   ```
+### success response
+
+
+```json
+  {
+    "message": "blogs fetched successfully",
+    "count": 10,
+    "success": true,
+    "data": [
+        {
+            "timeStamp": {
+                "createdAt": "2025-06-14T13:57:17.111Z",
+                "updatedAt": "2025-06-14T13:57:17.111Z"
+            },
+            "_id": "684d7fbdd83f10961a6fc8ff",
+            "userId": "684d7cc0d83f10961a6fc8ea",
+            "title": "Beyond Extinction: The Chozo's Ascended Legacy and Samus's Unwitting Role",
+            "description": "A deep dive into the possibility that the Chozo didn't just disappear, but ascended to a higher plane, subtly influencing events and using Samus Aran for a purpose yet unknown.",
+            "author": "Okarun Takamura",
+            "state": "published",
+            "readCount": 0,
+            "readingTime": "2m 39s",
+            "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw",
+            "tags": [ "Metroid", "FanTheory", "Chozo", "SamusAran", "Lore", "Gaming", "Nintendo", "SciFi"
+            ],
+            "body": "The Chozo, the enigmatic bird-like benefactors of Samus Aran, a........",
+            "likedUsers": [],
+            "fandom": "Metroid",
+            "rating": [],
+            "comments": [],
+            "__v": 0
+        },
+        // ... other blogs ...
+         
+    ]
+}
+```
+
+
+# 8. Editing blogs
+
+   - HTTP method: PATCH
+   - URL: /v1/api/blog/user/edit/:blogId
+   - Description: Edits a blog using the provided blog id
+
+### This operation requires a token hence users need to be signed in and one user cannot edit another users blogs
+
+### request params
+   *compulsory*
+   - blogId
+
+### Body params:
+
+   - title (must be unique)
+   - description (string)
+   - body (string)
+   - tags (array)
+   - fandom (string)
+   - headImageUrl (string)
+
+  Sample Request body
+
+  ```json
+      {
+         "title": "The Undead Curse: Choice or Inevitability?",
+         "description": "Exploring the philosophical ?",
+         "body": "The world of Dark Souls i.....",
+         "tags": ["DarkSouls", "FanTheory", "Lore", "FromSoftware", "Gaming", "UndeadCurse", "Philosophy", "Soulsborne", "Existentialism"],
+         "fandom": "Dark Souls",
+         "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw"
+      }
+  ```
+
+
+
+### How to fetch (using fetch):
+
+```javascript
+   const res = await fetch(`/v1/api/blog/user/fetchposts`,{
+   method: "GET",
+   headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer <your_jwt_token>`
+   },
+   });
+
+```
+
+### How to fetch (using axios):
+
+   ```javascript
+      const res = await axios.post(`/v1/api/blog/user/fetchposts`,{ headers: { "Authorization": `Bearer <your_jwt_token>`} });
+
+   ```
+### success response
+
+
+```json
+   {
+    "message": "blog edited successfully",
+    "data": {
+        "timeStamp": {
+            "createdAt": "2025-06-14T14:03:25.434Z",
+            "updatedAt": "2025-06-15T06:57:31.570Z"
+        },
+        "_id": "684d812d7417c9bd7ac1f65d",
+        "userId": "684d7cc0d83f10961a6fc8ea",
+        "title": "The Undead Curse: Choice or Inevitability",
+        "description": "Exploring the philosophical ",
+        "author": "Okarun Takamura",
+        "state": "draft",
+        "readCount": 0,
+        "readingTime": "1m 31s",
+        "headImageUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ-LOlVep8-oIQTwhgjsGJWzP0EORdoQd0AO8CKOFR4duBMM_UfVmO-44LufawrKq8wzcbACw",
+        "tags": [ "DarkSouls", "FanTheory", "Lore", "FromSoftware", "Gaming", "UndeadCurse", "Philosophy", "Soulsborne", "Existentialism"
+        ],
+        "body": "The world of Dark Souls ......",
+        "likedUsers": [],
+        "fandom": "Dark Souls",
+        "rating": [],
+        "comments": [],
+        "__v": 1
+    },
+    "success": true
+}
 ```
