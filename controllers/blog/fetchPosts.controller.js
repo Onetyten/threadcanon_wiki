@@ -9,15 +9,18 @@ export async function FetchPostsController(req,res) {
     const sortOrder = order === "desc" ? -1 : 1
     const skip = (page - 1) * limit
     const state = req.query.state || "published"
-    const filter = {userId}
+    let filter = {userId}
 
-    if (state!=="published" && state!=="draft") {
-        console.log("INFO","\n fetchBlog.controller","Invalid state")
-        return res.status(400).json({message:"Invalid state",success:false})
+    const allowedStates = ['published', 'draft'];
+    if (req.query.state && !allowedStates.includes(req.query.state)) {
+    return res.status(400).json({
+        success: false,
+        message: 'Invalid state parameter',
+    });
     }
-
-    if (state) {
-        filter.state = state
+    
+    if (req.query.state) {
+    filter.state = req.query.state;
     }
 
 

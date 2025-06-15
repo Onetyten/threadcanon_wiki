@@ -13,7 +13,7 @@ export async function CreateBlogController(req,res){
         console.log("WARN","\n createBlog.controller.js","invalid request")
         return res.status(400).json({message:"invalid request",success:false})
     }
-    const state = req.query.state || "draft"
+    let state = req.query.state || "draft"
     if (state!=="draft" && state!=="published"){
         state = "draft"
     }
@@ -29,13 +29,15 @@ export async function CreateBlogController(req,res){
             return res.status(201).json({message:`blog ${newBlog.title} created successfully and saved as ${newBlog.state}`,success:true,data:newBlog})
     }
     catch (error) {
-        if (error.code === 11000){
-            console.log(`blog with title ${title} already exists`)
-            return res.status(409).json({message:"blog already exists",success:false})
-        }
-       console.log(error)
-       return res.status(500).json({message:error.message,success:false})
+    if (error.code === 11000 || error.name === 'MongoServerError' && error.message.includes('E11000')) {
+        console.log(`Duplicate blog title "${title}" from ${req.originalUrl}`);
+        return res.status(409).json({ message: "blog already exists", success: false });
     }
+
+    console.log("Unhandled error:", error);
+    return res.status(500).json({ message: error.message, success: false });
+    }
+
 }
 
 function CheckInputValidity(req){

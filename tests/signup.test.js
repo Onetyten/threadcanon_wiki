@@ -1,17 +1,20 @@
 import request from 'supertest';
 import { app } from '../app.js'; // Assuming app is exported from app.js
 import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import user from '../models/userModel.js';
 import dotenv from 'dotenv';
 
 // Load the .env.test file from the project root
 dotenv.config({ path: '.env.test' });
 
+let mongoServer;
 
 beforeAll(async () => {
-  // Connect to the test database
-  await mongoose.connect(process.env.DB_URL);
-  console.log('MongoDB Test DB connected:', process.env.DB_URL);
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+  await mongoose.connect(uri);
+  console.log('In-memory MongoDB connected for signup tests');
 });
 
 afterEach(async () => {
@@ -21,9 +24,9 @@ afterEach(async () => {
 });
 
 afterAll(async () => {
-  // Close the Mongoose connection after all tests are done
-  await mongoose.connection.close();
-  console.log('MongoDB Test DB connection closed.');
+  await mongoose.disconnect();
+  await mongoServer.stop();
+  console.log('In-memory MongoDB connection closed for signup tests.');
 });
 
 describe('POST /v1/auth/signup', () => {
