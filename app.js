@@ -12,6 +12,7 @@ import fetchBlogRoute from './Routes/v1/api/fetchBlogRoute.js'
 import fetchOneBlogRoute from './Routes/v1/api/fetchOneBlogRoute.js'
 import fetchPostRoutes from './Routes/v1/api/fetchPostRoutes.js'
 import editBlogRoute from './Routes/v1/api/editBlogRoute.js'
+import deleteBlogRoute from './Routes/v1/api/deleteBlogRoute.js'
 const PORT = process.env.PORT || 4000;
 import Authorization from './middlewares/authorization.js';
 
@@ -42,6 +43,7 @@ app.use('/v1/api/blog/',createBlogRoute)
 app.use('/v1/api/blog/',publishBlogRoute)
 app.use('/v1/api/blog/',fetchPostRoutes)
 app.use('/v1/api/blog/',editBlogRoute)
+app.use('/v1/api/blog/',deleteBlogRoute)
 
 
 
