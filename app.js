@@ -27,6 +27,11 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
+// Root route
+app.get('/', (req, res) => {
+  res.status(200).json({ success: true, message: 'Thread Canon API is running lets make some blogs' });
+});
+
 //Authentication routes
 app.use('/v1/auth/',signUpRoute)
 app.use('/v1/auth/',signInRoute)
